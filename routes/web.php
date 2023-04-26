@@ -34,8 +34,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,guru_p3k,guru_ppl']], fun
 
     Route::resource('admin', AdminController::class);
 
-    Route::resource('kepala-sekolah', KepalaSekolahController::class);
-
     Route::resource('guru-p3k', GuruP3KController::class);
 
     Route::resource('guru-ppl', GuruPPLController::class);
