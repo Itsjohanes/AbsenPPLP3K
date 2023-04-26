@@ -31,8 +31,17 @@ class HomeController extends Controller
         $detail_p3k = GuruP3KAbsen::where('tgl', $tanggal)->get();
         $detail_ppl = GuruPPLAbsen::where('tgl', $tanggal)->get();
 
-        $persen_p3k = ((GuruP3KAbsen::where('tgl', $tanggal)->count()) / (GuruP3K::count())) * 100;
-        $persen_ppl = ((GuruPPLAbsen::where('tgl', $tanggal)->count()) / (GuruPPL::count())) * 100;
+        if (GuruP3K::count() == 0) {
+            $persen_p3k = 0;
+        } else {
+
+            $persen_p3k = ((GuruP3KAbsen::where('tgl', $tanggal)->count()) / (GuruP3K::count())) * 100;
+        }
+        if (GuruPPL::count() == 0) {
+            $persen_ppl = 0;
+        } else {
+            $persen_ppl = ((GuruPPLAbsen::where('tgl', $tanggal)->count()) / (GuruPPL::count())) * 100;
+        }
 
         return view('pages.home', compact('admin', 'guru_ppl', 'guru_p3k', 'p3k_absen', 'ppl_absen', 'detail_p3k', 'detail_ppl', 'tanggal', 'persen_p3k', 'persen_ppl'));
     }
